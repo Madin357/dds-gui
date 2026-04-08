@@ -25,7 +25,7 @@ export default function SkillsPage() {
 
   function DemandBadge({ level }: { level: string | null }) {
     if (!level) return <span className="text-xs text-slate-400">—</span>;
-    const cls: Record<string, string> = { high: "bg-green-100 text-green-700", medium: "bg-amber-100 text-amber-700", low: "bg-slate-100 text-slate-600", declining: "bg-red-100 text-red-700", emerging: "bg-blue-100 text-blue-700" };
+    const cls: Record<string, string> = { high: "bg-green-100 text-green-700", medium: "bg-amber-100 text-amber-700", low: "bg-slate-100 text-slate-600", declining: "bg-red-100 text-red-700", emerging: "bg-blue-100 text-blue-700", growing: "bg-green-100 text-green-700", stable: "bg-slate-100 text-slate-600" };
     const label = t(`skills.${level}` as any) || level;
     return <span className={`px-2 py-0.5 rounded text-xs font-medium capitalize ${cls[level] || "bg-slate-100 text-slate-600"}`}>{label}</span>;
   }
