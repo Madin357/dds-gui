@@ -87,19 +87,21 @@ export default function DashboardPage() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div className="bg-white rounded-lg shadow-sm p-6">
           <h2 className="text-sm font-semibold text-slate-700 mb-4">{t("dashboard.programPerformance")}</h2>
-          <table className="w-full text-sm">
-            <thead><tr className="text-left text-slate-500 border-b"><th className="pb-2 font-medium">{t("dashboard.program")}</th><th className="pb-2 font-medium text-right">{t("dashboard.score")}</th><th className="pb-2 font-medium text-right">{t("dashboard.completion")}</th></tr></thead>
-            <tbody>
-              {top_programs.map((p, i) => (
-                <tr key={i} className="border-b border-slate-50">
-                  <td className="py-2.5 text-slate-700">{t(`programNames.${p.name}` as any) || p.name}</td>
-                  <td className="py-2.5 text-right"><span className={`inline-block px-2 py-0.5 rounded text-xs font-medium ${(p.performance_score || 0) >= 70 ? "bg-green-100 text-green-700" : (p.performance_score || 0) >= 50 ? "bg-amber-100 text-amber-700" : "bg-red-100 text-red-700"}`}>{p.performance_score?.toFixed(0) || "—"}</span></td>
-                  <td className="py-2.5 text-right text-slate-600">{p.completion_rate?.toFixed(0) || "—"}%</td>
-                </tr>
-              ))}
-              {top_programs.length === 0 && <tr><td colSpan={3} className="py-4 text-center text-slate-400">{t("common.noData")}</td></tr>}
-            </tbody>
-          </table>
+          <div className="max-h-64 overflow-y-auto">
+            <table className="w-full text-sm">
+              <thead className="sticky top-0 bg-white"><tr className="text-left text-slate-500 border-b"><th className="pb-2 font-medium">{t("dashboard.program")}</th><th className="pb-2 font-medium text-right">{t("dashboard.score")}</th><th className="pb-2 font-medium text-right">{t("dashboard.completion")}</th></tr></thead>
+              <tbody>
+                {top_programs.map((p, i) => (
+                  <tr key={i} className="border-b border-slate-50">
+                    <td className="py-2.5 text-slate-700">{t(`programNames.${p.name}` as any) || p.name}</td>
+                    <td className="py-2.5 text-right"><span className={`inline-block px-2 py-0.5 rounded text-xs font-medium ${(p.performance_score || 0) >= 70 ? "bg-green-100 text-green-700" : (p.performance_score || 0) >= 50 ? "bg-amber-100 text-amber-700" : "bg-red-100 text-red-700"}`}>{p.performance_score?.toFixed(0) || "—"}</span></td>
+                    <td className="py-2.5 text-right text-slate-600">{p.completion_rate?.toFixed(0) || "—"}%</td>
+                  </tr>
+                ))}
+                {top_programs.length === 0 && <tr><td colSpan={3} className="py-4 text-center text-slate-400">{t("common.noData")}</td></tr>}
+              </tbody>
+            </table>
+          </div>
         </div>
         <div className="bg-white rounded-lg shadow-sm p-6">
           <h2 className="text-sm font-semibold text-slate-700 mb-4">{t("dashboard.topRecommendations")}</h2>

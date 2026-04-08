@@ -99,7 +99,6 @@ async def get_dashboard(user: CurrentUser, db: DB):
         .join(AnalyticsProgramScore, AnalyticsProgramScore.program_id == Program.id)
         .where(Program.institution_id == inst_id)
         .order_by(AnalyticsProgramScore.performance_score.desc())
-        .limit(5)
     )
     top_result = await db.execute(top_progs_q)
     top_programs = [
