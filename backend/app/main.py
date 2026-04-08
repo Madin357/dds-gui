@@ -4,7 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.api.routes import auth, students, programs, analytics, sync_routes, recommendations
 
 app = FastAPI(
-    title="DDS - Higher Education Intelligence Platform",
+    title="EduScope - Higher Education Intelligence Platform",
     description="Analytics platform for universities and course providers in Azerbaijan",
     version="0.1.0",
 )
@@ -28,4 +28,4 @@ app.include_router(recommendations.router, prefix="/api/v1")
 
 @app.get("/api/health")
 async def health_check():
-    return {"status": "ok", "service": "dds-platform"}
+    return {"status": "ok", "service": "eduscope"}

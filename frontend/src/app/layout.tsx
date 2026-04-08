@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "DDS - Higher Education Intelligence Platform",
+  title: "EduScope - Higher Education Intelligence Platform",
   description: "Analytics platform for universities and course providers in Azerbaijan",
 };
 

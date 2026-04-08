@@ -6,9 +6,9 @@ export default function LandingPage() {
         <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <div className="w-8 h-8 bg-[#1e3a5f] rounded-lg flex items-center justify-center">
-              <span className="text-white text-sm font-bold">D</span>
+              <span className="text-white text-sm font-bold">E</span>
             </div>
-            <span className="text-lg font-bold text-[#1e3a5f]">DDS Platform</span>
+            <span className="text-lg font-bold text-[#1e3a5f]">EduScope</span>
           </div>
           <div className="flex items-center gap-4">
             <a href="/login" className="text-sm text-slate-600 hover:text-slate-900 transition">Sign In</a>
@@ -120,7 +120,7 @@ export default function LandingPage() {
       {/* Footer */}
       <footer className="py-8 px-6 border-t border-slate-100">
         <div className="max-w-6xl mx-auto flex items-center justify-between text-sm text-slate-400">
-          <span>DDS Platform — Azerbaijan Higher Education Intelligence</span>
+          <span>EduScope — Azerbaijan Higher Education Intelligence</span>
           <span>Built for the future of education</span>
         </div>
       </footer>

@@ -30,7 +30,7 @@ export default function LoginPage() {
       <div className="w-full max-w-md">
         <div className="bg-white rounded-xl shadow-lg p-8">
           <div className="text-center mb-8">
-            <h1 className="text-2xl font-bold text-[#1e3a5f]">DDS Platform</h1>
+            <h1 className="text-2xl font-bold text-[#1e3a5f]">EduScope</h1>
             <p className="text-sm text-slate-500 mt-1">
               Higher Education Intelligence Platform
             </p>

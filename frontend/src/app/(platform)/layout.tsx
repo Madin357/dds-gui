@@ -44,7 +44,7 @@ export default function PlatformLayout({ children }: { children: React.ReactNode
       {/* Sidebar */}
       <aside className="w-64 bg-[#1e3a5f] flex flex-col shrink-0">
         <div className="px-5 py-5 border-b border-white/10">
-          <h1 className="text-lg font-bold text-white">DDS Platform</h1>
+          <h1 className="text-lg font-bold text-white">EduScope</h1>
           <p className="text-xs text-blue-200 mt-0.5 truncate">
             {user?.institution_name}
           </p>

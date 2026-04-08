@@ -1,4 +1,4 @@
-# Azerbaijan Higher Education & Skills Intelligence Platform — MVP Plan
+# EduScope — Higher Education Intelligence Platform — MVP Plan
 
 ---
 
@@ -238,8 +238,8 @@ skill_trends (global/regional reference data)
 
 ```sql
 -- ============================================================
--- Azerbaijan Higher Education & Skills Intelligence Platform
--- PostgreSQL Schema for MVP
+-- EduScope — Higher Education Intelligence Platform
+-- Database Schema for MVP
 -- ============================================================
 
 -- Extensions
@@ -1583,7 +1583,7 @@ If time is extremely tight, cut to this core:
 
 **Duration**: 8-10 minutes
 
-1. **Landing page** (30s) — "This is Azerbaijan's first Higher Education Intelligence Platform."
+1. **Landing page** (30s) — "This is EduScope — Azerbaijan's first Higher Education Intelligence Platform."
 
 2. **Login as university admin** (15s) — Pre-filled credentials, instant login.
 
