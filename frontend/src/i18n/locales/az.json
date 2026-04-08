@@ -331,6 +331,18 @@
     "tablesCount": "{count} cədvəl",
     "syncing": "Sinxronlaşır...",
     "syncNow": "İndi Sinxronla",
-    "loading": "Parametrlər yüklənir..."
+    "loading": "Parametrlər yüklənir...",
+    "statusCompleted": "Tamamlandı",
+    "statusRunning": "İcra olunur",
+    "statusFailed": "Uğursuz",
+    "statusPartial": "Qismən",
+    "statusPending": "Gözləmədə",
+    "typeFull": "Tam",
+    "typeIncremental": "Artımlı"
+  },
+
+  "syncJobNames": {
+    "BEU Student Information System": "BEU Tələbə Məlumat Sistemi",
+    "ADA Learning Management System": "ADA Təlim İdarəetmə Sistemi"
   }
 }

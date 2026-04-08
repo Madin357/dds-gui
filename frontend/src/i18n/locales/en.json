@@ -331,6 +331,18 @@
     "tablesCount": "{count} tables",
     "syncing": "Syncing...",
     "syncNow": "Sync Now",
-    "loading": "Loading settings..."
+    "loading": "Loading settings...",
+    "statusCompleted": "Completed",
+    "statusRunning": "Running",
+    "statusFailed": "Failed",
+    "statusPartial": "Partial",
+    "statusPending": "Pending",
+    "typeFull": "Full",
+    "typeIncremental": "Incremental"
+  },
+
+  "syncJobNames": {
+    "BEU Student Information System": "BEU Student Information System",
+    "ADA Learning Management System": "ADA Learning Management System"
   }
 }
