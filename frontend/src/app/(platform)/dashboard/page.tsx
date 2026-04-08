@@ -78,7 +78,7 @@ export default function DashboardPage() {
           <h2 className="text-sm font-semibold text-slate-700 mb-4">{t("dashboard.quickStats")}</h2>
           <div className="space-y-4">
             <Stat label={t("dashboard.programs")} value={kpis.total_programs} />
-            <Stat label={t("dashboard.averageGpa")} value={kpis.avg_gpa?.toFixed(2) || t("common.na")} />
+            <Stat label={t("dashboard.averageGpa")} value={kpis.avg_gpa ? `${kpis.avg_gpa.toFixed(1)}/100` : t("common.na")} />
             <Stat label={t("dashboard.dropoutRate")} value={kpis.overall_dropout_rate ? `${kpis.overall_dropout_rate.toFixed(1)}%` : t("common.na")} />
           </div>
         </div>
