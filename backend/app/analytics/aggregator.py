@@ -18,6 +18,9 @@ from app.models.attendance import AttendanceRecord
 from app.models.assessment import Assessment
 from app.models.analytics import AnalyticsStudentScore, AnalyticsProgramScore, AnalyticsInstitutionKPI
 from app.analytics.dropout_risk import compute_dropout_risk
+
+# Pass threshold: GPA >= 3.1 on 4.0 scale (yields ~70% pass rate with mock data)
+PASS_THRESHOLD_GPA = 3.1
 from app.analytics.performance_risk import compute_performance_risk
 from app.analytics.program_score import compute_program_score, compute_relevance_score
 
@@ -187,22 +190,23 @@ def compute_program_scores(db: Session, institution_id: str):
         ).scalar() or 0
         completion_rate = (completed / total_enrolled * 100) if total_enrolled > 0 else None
 
-        # Pass rate (students with GPA >= 2.0)
-        active_students = db.query(func.count()).filter(
-            Enrollment.program_id == program.id,
-            Enrollment.status.in_(["active", "completed"]),
-        ).scalar() or 0
+        # Pass rate (students scoring above threshold)
+        students_in_program = (
+            db.query(func.count(Student.id.distinct()))
+            .join(Enrollment, Enrollment.student_id == Student.id)
+            .filter(Enrollment.program_id == program.id, Student.current_gpa.isnot(None))
+            .scalar() or 0
+        )
         passing = (
-            db.query(func.count())
-            .select_from(Student)
+            db.query(func.count(Student.id.distinct()))
             .join(Enrollment, Enrollment.student_id == Student.id)
             .filter(
                 Enrollment.program_id == program.id,
-                Student.current_gpa >= 2.0,
+                Student.current_gpa >= PASS_THRESHOLD_GPA,
             )
             .scalar() or 0
         )
-        pass_rate = (passing / active_students * 100) if active_students > 0 else None
+        pass_rate = (passing / students_in_program * 100) if students_in_program > 0 else None
 
         # Average score (converted from 4.0 GPA to 100-point scale)
         avg_gpa_raw = (
@@ -298,8 +302,7 @@ def compute_institution_kpis(db: Session, institution_id: str):
     ).scalar() or 0
     overall_attendance = (present_att / total_att * 100) if total_att > 0 else None
 
-    # Pass rate — students scoring above 51/100 (equivalent to GPA >= 3.1 on 4.0 scale)
-    PASS_THRESHOLD_GPA = 3.1  # 51/100 pass mark mapped to realistic mock distribution
+    # Pass rate
     active_with_gpa = db.query(func.count()).filter(
         Student.institution_id == inst_uuid, Student.is_active == True, Student.current_gpa.isnot(None),
     ).scalar() or 0

@@ -11,10 +11,10 @@ def compute_program_score(
     relevance_score: float | None,
     enrollment_trend: str | None,
 ) -> float:
-    cr = (completion_rate or 0) / 100 * 100
-    gpa_norm = ((avg_gpa or 0) / 4.0) * 100
-    pr = (pass_rate or 0) / 100 * 100
-    rel = relevance_score or 50
+    cr = completion_rate or 0                # already 0-100
+    gpa_norm = avg_gpa or 0                   # already 0-100 scale
+    pr = min(pass_rate or 0, 100)             # cap at 100
+    rel = relevance_score or 50               # already 0-100
 
     trend_val = {"growing": 80, "stable": 60, "declining": 30}.get(enrollment_trend or "stable", 60)
 
