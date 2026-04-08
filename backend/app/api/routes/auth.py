@@ -4,8 +4,6 @@ from datetime import datetime, timezone
 import jwt
 from fastapi import APIRouter, HTTPException, status
 from sqlalchemy import select
-from slugify import slugify
-
 from app.api.deps import DB, CurrentUser, hash_password, verify_password, create_access_token, create_refresh_token
 from app.config import get_settings
 from app.models.institution import Institution, InstitutionType
