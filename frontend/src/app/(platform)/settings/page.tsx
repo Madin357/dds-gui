@@ -37,6 +37,15 @@ export default function SettingsPage() {
     } catch (e) { console.error(e); setSyncing(null); }
   }
 
+  const syncStatusLabel = (status: string) => {
+    const map: Record<string, string> = { completed: t("settings.statusCompleted"), running: t("settings.statusRunning"), failed: t("settings.statusFailed"), partial: t("settings.statusPartial"), pending: t("settings.statusPending") };
+    return map[status] || status;
+  };
+  const syncTypeLabel = (type: string) => {
+    const map: Record<string, string> = { full: t("settings.typeFull"), incremental: t("settings.typeIncremental") };
+    return map[type] || type;
+  };
+
   if (loading) return <div className="animate-pulse text-slate-400 py-8">{t("settings.loading")}</div>;
 
   return (
