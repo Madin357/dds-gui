@@ -36,12 +36,13 @@ export default function RecommendationsPage() {
     return map[level] || level;
   };
 
-  const recTitle = (title: string) => t(`recData.${title}` as any) || title;
-  const recDesc = (desc: string) => {
-    // Use first 40 chars as a stable key
-    const key = desc.slice(0, 40).replace(/[^a-zA-Z0-9]/g, "_");
-    const translated = t(`recDesc.${key}` as any);
-    return translated !== `recDesc.${key}` ? translated : desc;
+  const recTitle = (title: string) => {
+    const v = t(`recData.${title}` as any);
+    return v !== `recData.${title}` ? v : title;
+  };
+  const recDesc = (title: string, desc: string) => {
+    const v = t(`recDescByTitle.${title}` as any);
+    return v !== `recDescByTitle.${title}` ? v : desc;
   };
 
   return (
@@ -85,7 +86,7 @@ export default function RecommendationsPage() {
                     {r.ai_generated && <span className="px-2 py-0.5 rounded text-xs font-medium bg-violet-100 text-violet-700">{t("recommendations.aiGenerated")}</span>}
                   </div>
                   <h3 className="text-base font-semibold text-slate-800">{recTitle(r.title)}</h3>
-                  <p className="text-sm text-slate-600 mt-2 leading-relaxed">{recDesc(r.description)}</p>
+                  <p className="text-sm text-slate-600 mt-2 leading-relaxed">{recDesc(r.title, r.description)}</p>
                 </div>
                 <div className="flex flex-col gap-2 shrink-0">
                   <button onClick={() => updateStatus(r.id, "accepted")} className="px-4 py-1.5 text-xs font-medium bg-green-600 text-white rounded-lg hover:bg-green-700 transition">{t("common.accept")}</button>

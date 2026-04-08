@@ -296,16 +296,16 @@
     "Launch Cloud & DevOps Bootcamp": "Launch Cloud & DevOps Bootcamp"
   },
 
-  "recDesc": {
-    "Market_demand_for_data_science_skills_is": "Market demand for data science skills is growing 30% YoY. Your Computer Science program already covers 60% of prerequisite skills. Adding a Data Science track would attract high-demand students and improve employment outcomes.",
-    "Enrollment_is_declining_10__YoY_and_labou": "Enrollment is declining 10% YoY and labour market demand for traditional language skills is low. Consider adding digital content creation, translation technology, and computational linguistics modules.",
-    "15__of_first_year_students_are_dropping_o": "15% of first-year students are dropping out. Targeted mentoring for students with attendance below 75% in the first 4 weeks could reduce first-year dropout by 30-40%.",
-    "Civil_Engineering_has_the_lowest_average_": "Civil Engineering has the lowest average scores. Student feedback indicates insufficient lab time. Expanding lab hours could improve practical skill development.",
-    "Strong_correlation_detected__students_wit": "Strong correlation detected: students with attendance below 70% have GPAs 1.5 points lower on average. Automatic referral to academic support when attendance drops below 75% is recommended.",
-    "Cybersecurity_demand_is_surging___25__gro": "Cybersecurity demand is surging (+25% growth) but your current Essentials course is introductory. An advanced track covering penetration testing and incident response would fill a critical market gap.",
-    "PM_program_has_the_lowest_completion_rate": "PM program has the lowest completion rate (60%) and below-average engagement. Consider adding Agile certifications prep and real-world case studies from local companies.",
-    "20__of_students_drop_out_in_the_first_mon": "20% of students drop out in the first month. A structured onboarding week with mentoring, clear milestone expectations, and early success experiences could significantly reduce early dropout.",
-    "Cloud_DevOps_skills_are_growing_28__YoY_w": "Cloud/DevOps skills are growing 28% YoY with very few local training options. Your Cloud Computing course covers basics — a full DevOps bootcamp would meet unserved demand."
+  "recDescByTitle": {
+    "Launch Data Science Specialization": "Market demand for data science skills is growing 30% YoY. Your Computer Science program already covers 60% of prerequisite skills. Adding a Data Science track would attract high-demand students and improve employment outcomes.",
+    "Update Language & Literature Program": "Enrollment is declining 10% YoY and labour market demand for traditional language skills is low. Consider adding digital content creation, translation technology, and computational linguistics modules.",
+    "Implement First-Year Early Warning System": "15% of first-year students are dropping out. Targeted mentoring for students with attendance below 75% in the first 4 weeks could reduce first-year dropout by 30-40%.",
+    "Increase Engineering Lab Capacity": "Civil Engineering has the lowest average scores. Student feedback indicates insufficient lab time. Expanding lab hours could improve practical skill development.",
+    "Attendance-Linked Academic Support": "Strong correlation detected: students with attendance below 70% have scores 1.5 points lower on average. Automatic referral to academic support when attendance drops below 75% is recommended.",
+    "Add Cybersecurity Advanced Track": "Cybersecurity demand is surging (+25% growth) but your current Essentials course is introductory. An advanced track covering penetration testing and incident response would fill a critical market gap.",
+    "Refresh Project Management Curriculum": "PM program has the lowest completion rate (60%) and below-average engagement. Consider adding Agile certifications prep and real-world case studies from local companies.",
+    "First-Month Onboarding Enhancement": "20% of students drop out in the first month. A structured onboarding week with mentoring, clear milestone expectations, and early success experiences could significantly reduce early dropout.",
+    "Launch Cloud & DevOps Bootcamp": "Cloud/DevOps skills are growing 28% YoY with very few local training options. Your Cloud Computing course covers basics — a full DevOps bootcamp would meet unserved demand."
   },
 
   "settings": {

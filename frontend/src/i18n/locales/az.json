@@ -296,16 +296,16 @@
     "Launch Cloud & DevOps Bootcamp": "Cloud və DevOps bootcamp başladın"
   },
 
-  "recDesc": {
-    "Market_demand_for_data_science_skills_is": "Data Science bacarıqlarına bazar tələbi ildən-ilə 30% artır. Computer Science proqramınız artıq ilkin tələblərin 60%-ni əhatə edir. Data Science istiqamətinin əlavə edilməsi yüksək tələbatlı tələbələri cəlb edər və məşğulluq nəticələrini yaxşılaşdırar.",
-    "Enrollment_is_declining_10__YoY_and_labou": "Qeydiyyat ildən-ilə 10% azalır və ənənəvi dil bacarıqlarına bazar tələbi aşağıdır. Rəqəmsal kontent yaradılması, tərcümə texnologiyaları və kompüter dilçiliyi modullarının əlavə edilməsini nəzərdən keçirin.",
-    "15__of_first_year_students_are_dropping_o": "Birinci kurs tələbələrinin 15%-i təhsili tərk edir. İlk 4 həftədə davamiyyəti 75%-dən aşağı olan tələbələr üçün hədəfli mentorluq birinci kurs tərk etmə nisbətini 30-40% azalda bilər.",
-    "Civil_Engineering_has_the_lowest_average_": "Mülki Mühəndislik ən aşağı orta ballara malikdir. Tələbə rəyləri laboratoriya vaxtının kifayət etmədiyini göstərir. Laboratoriya saatlarının artırılması praktik bacarıqların inkişafını yaxşılaşdıra bilər.",
-    "Strong_correlation_detected__students_wit": "Güclü korrelyasiya aşkar edildi: davamiyyəti 70%-dən aşağı olan tələbələrin QNO-su orta hesabla 1.5 bal aşağıdır. Davamiyyət 75%-dən aşağı düşdükdə akademik dəstəyə avtomatik yönləndirmə tövsiyə olunur.",
-    "Cybersecurity_demand_is_surging___25__gro": "Kibertəhlükəsizlik tələbi sürətlə artır (+25% artım), lakin hazırkı kursunuz giriş səviyyəlidir. Penetrasiya testi və insidentlərə cavab verməni əhatə edən təkmil proqram kritik bazar boşluğunu doldurar.",
-    "PM_program_has_the_lowest_completion_rate": "Layihə İdarəetməsi proqramı ən aşağı tamamlanma nisbətinə (60%) və orta səviyyədən aşağı iştirakçılığa malikdir. Agile sertifikatlaşdırma hazırlığı və yerli şirkətlərdən real iş nümunələrinin əlavə edilməsini nəzərdən keçirin.",
-    "20__of_students_drop_out_in_the_first_mon": "Tələbələrin 20%-i ilk ayda tərk edir. Mentorluq, aydın mərhələ gözləntiləri və erkən uğur təcrübələri ilə strukturlaşdırılmış adaptasiya həftəsi erkən tərk etməni əhəmiyyətli dərəcədə azalda bilər.",
-    "Cloud_DevOps_skills_are_growing_28__YoY_w": "Cloud/DevOps bacarıqlarına tələb ildən-ilə 28% artır və yerli təlim seçimləri çox azdır. Cloud Computing kursunuz əsasları əhatə edir — tam DevOps bootcamp qarşılanmamış tələbi ödəyər."
+  "recDescByTitle": {
+    "Launch Data Science Specialization": "Data Science bacarıqlarına bazar tələbi ildən-ilə 30% artır. Kompüter Elmləri ixtisasınız artıq ilkin tələblərin 60%-ni əhatə edir. Data Science istiqamətinin əlavə edilməsi yüksək tələbatlı tələbələri cəlb edər və məşğulluq nəticələrini yaxşılaşdırar.",
+    "Update Language & Literature Program": "Qeydiyyat ildən-ilə 10% azalır və ənənəvi dil bacarıqlarına bazar tələbi aşağıdır. Rəqəmsal kontent yaradılması, tərcümə texnologiyaları və kompüter dilçiliyi modullarının əlavə edilməsini nəzərdən keçirin.",
+    "Implement First-Year Early Warning System": "Birinci kurs tələbələrinin 15%-i təhsili tərk edir. İlk 4 həftədə davamiyyəti 75%-dən aşağı olan tələbələr üçün hədəfli mentorluq birinci kurs tərk etmə nisbətini 30-40% azalda bilər.",
+    "Increase Engineering Lab Capacity": "Mülki Mühəndislik ən aşağı orta ballara malikdir. Tələbə rəyləri laboratoriya vaxtının kifayət etmədiyini göstərir. Laboratoriya saatlarının artırılması praktik bacarıqların inkişafını yaxşılaşdıra bilər.",
+    "Attendance-Linked Academic Support": "Güclü korrelyasiya aşkar edildi: davamiyyəti 70%-dən aşağı olan tələbələrin balı orta hesabla 1.5 bal aşağıdır. Davamiyyət 75%-dən aşağı düşdükdə akademik dəstəyə avtomatik yönləndirmə tövsiyə olunur.",
+    "Add Cybersecurity Advanced Track": "Kibertəhlükəsizlik tələbi sürətlə artır (+25% artım), lakin hazırkı kursunuz giriş səviyyəlidir. Penetrasiya testi və insidentlərə cavab verməni əhatə edən təkmil proqram kritik bazar boşluğunu doldurar.",
+    "Refresh Project Management Curriculum": "Layihə İdarəetməsi ixtisası ən aşağı tamamlanma nisbətinə (60%) və orta səviyyədən aşağı iştirakçılığa malikdir. Agile sertifikatlaşdırma hazırlığı və yerli şirkətlərdən real iş nümunələrinin əlavə edilməsini nəzərdən keçirin.",
+    "First-Month Onboarding Enhancement": "Tələbələrin 20%-i ilk ayda tərk edir. Mentorluq, aydın mərhələ gözləntiləri və erkən uğur təcrübələri ilə strukturlaşdırılmış adaptasiya həftəsi erkən tərk etməni əhəmiyyətli dərəcədə azalda bilər.",
+    "Launch Cloud & DevOps Bootcamp": "Cloud/DevOps bacarıqlarına tələb ildən-ilə 28% artır və yerli təlim seçimləri çox azdır. Cloud Computing kursunuz əsasları əhatə edir — tam DevOps bootcamp qarşılanmamış tələbi ödəyər."
   },
 
   "settings": {
