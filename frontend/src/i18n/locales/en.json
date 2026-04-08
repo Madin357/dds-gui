@@ -344,5 +344,10 @@
   "syncJobNames": {
     "BEU Student Information System": "BEU Student Information System",
     "ADA Learning Management System": "ADA Learning Management System"
+  },
+
+  "institutionNames": {
+    "Baku Engineering University": "Baku Engineering University",
+    "Azerbaijan Digital Academy": "Azerbaijan Digital Academy"
   }
 }

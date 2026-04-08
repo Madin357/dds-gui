@@ -344,5 +344,10 @@
   "syncJobNames": {
     "BEU Student Information System": "BEU Tələbə Məlumat Sistemi",
     "ADA Learning Management System": "ADA Təlim İdarəetmə Sistemi"
+  },
+
+  "institutionNames": {
+    "Baku Engineering University": "Bakı Mühəndislik Universiteti",
+    "Azerbaijan Digital Academy": "Azərbaycan Rəqəmsal Akademiyası"
   }
 }

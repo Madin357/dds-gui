@@ -53,7 +53,7 @@ export default function PlatformLayout({ children }: { children: React.ReactNode
             <img src="/logo.svg" alt="EduScope" className="w-8 h-8" />
             <h1 className="text-lg font-bold text-white">EduScope</h1>
           </div>
-          <p className="text-xs text-blue-200 mt-1.5 truncate">{user?.institution_name}</p>
+          <p className="text-xs text-blue-200 mt-1.5 truncate">{user?.institution_name ? (t(`institutionNames.${user.institution_name}` as any) || user.institution_name) : ""}</p>
         </div>
 
         <nav className="flex-1 py-4 space-y-1 px-3 overflow-y-auto">
