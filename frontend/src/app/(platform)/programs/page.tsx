@@ -58,7 +58,7 @@ export default function ProgramsPage() {
                 <td className="px-4 py-3 text-right text-slate-700">{p.student_count ?? "—"}</td>
                 <td className="px-4 py-3 text-right text-slate-700">{p.completion_rate?.toFixed(1) ?? "—"}%</td>
                 <td className="px-4 py-3 text-right text-slate-700">{p.pass_rate?.toFixed(1) ?? "—"}%</td>
-                <td className="px-4 py-3 text-right text-slate-700">{p.avg_gpa?.toFixed(2) ?? "—"}</td>
+                <td className="px-4 py-3 text-right text-slate-700">{p.avg_gpa?.toFixed(1) ?? "—"}</td>
                 <td className="px-4 py-3 text-right text-slate-700">{p.dropout_rate?.toFixed(1) ?? "—"}%</td>
                 <td className="px-4 py-3"><ScoreBar value={p.performance_score} /></td>
                 <td className="px-4 py-3"><ScoreBar value={p.relevance_score} /></td>

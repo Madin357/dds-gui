@@ -82,6 +82,9 @@ async def list_students(
     result = await db.execute(query)
     rows = result.all()
 
+    def gpa_to_100(gpa) -> float | None:
+        return round(float(gpa) / 4.0 * 100, 1) if gpa else None
+
     items = []
     for student, dropout_risk, perf_risk, att_rate in rows:
         items.append(StudentResponse(
@@ -92,7 +95,7 @@ async def list_students(
             email=student.email,
             gender=student.gender,
             enrollment_date=student.enrollment_date,
-            current_gpa=float(student.current_gpa) if student.current_gpa else None,
+            current_gpa=gpa_to_100(student.current_gpa),
             current_semester=student.current_semester,
             is_active=student.is_active,
             dropout_risk=float(dropout_risk) if dropout_risk else None,
@@ -125,7 +128,7 @@ async def at_risk_students(user: CurrentUser, db: DB, limit: int = Query(20, le=
             "student_code": s.student_code,
             "first_name": s.first_name,
             "last_name": s.last_name,
-            "current_gpa": float(s.current_gpa) if s.current_gpa else None,
+            "current_gpa": round(float(s.current_gpa) / 4.0 * 100, 1) if s.current_gpa else None,
             "current_semester": s.current_semester,
             "dropout_risk": float(a.dropout_risk) if a.dropout_risk else None,
             "performance_risk": float(a.performance_risk) if a.performance_risk else None,
@@ -172,7 +175,7 @@ async def get_student(student_id: str, user: CurrentUser, db: DB):
         gender=student.gender,
         date_of_birth=student.date_of_birth,
         enrollment_date=student.enrollment_date,
-        current_gpa=float(student.current_gpa) if student.current_gpa else None,
+        current_gpa=round(float(student.current_gpa) / 4.0 * 100, 1) if student.current_gpa else None,
         current_semester=student.current_semester,
         is_active=student.is_active,
         dropout_risk=float(analytics.dropout_risk) if analytics and analytics.dropout_risk else None,

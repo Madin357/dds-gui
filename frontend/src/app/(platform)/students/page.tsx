@@ -69,7 +69,7 @@ export default function StudentsPage() {
               <tr key={s.id} className="border-b border-slate-50 hover:bg-slate-50 cursor-pointer transition" onClick={() => window.location.href = `/students/${s.id}`}>
                 <td className="px-4 py-3 font-medium text-slate-700">{s.first_name} {s.last_name}</td>
                 <td className="px-4 py-3 text-slate-500">{s.student_code || "—"}</td>
-                <td className="px-4 py-3 text-right text-slate-700">{s.current_gpa?.toFixed(2) || "—"}</td>
+                <td className="px-4 py-3 text-right text-slate-700">{s.current_gpa?.toFixed(1) || "—"}</td>
                 <td className="px-4 py-3 text-right text-slate-500">{s.current_semester || "—"}</td>
                 <td className="px-4 py-3 text-right text-slate-700">{s.attendance_rate?.toFixed(1) || "—"}%</td>
                 <td className="px-4 py-3 text-center">{riskBadge(s.dropout_risk)}</td>

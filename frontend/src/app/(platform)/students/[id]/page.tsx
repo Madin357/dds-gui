@@ -49,7 +49,7 @@ export default function StudentDetailPage(props: { params: Promise<{ id: string 
               <span>{t("students.codeLabel")} {student.student_code || "—"}</span>
               <span>{t("students.programLabel")} {student.program_name || "—"}</span>
               <span>{t("students.semesterLabel")} {student.current_semester || "—"}</span>
-              <span>{t("students.gpaLabel")} {student.current_gpa?.toFixed(2) || "—"}</span>
+              <span>{t("students.gpaLabel")} {student.current_gpa?.toFixed(1) || "—"}</span>
             </div>
           </div>
           <span className={`px-3 py-1 rounded-lg text-sm font-medium ${student.is_active ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"}`}>{student.is_active ? t("students.active") : t("students.dropped")}</span>

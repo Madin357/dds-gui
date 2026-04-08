@@ -204,14 +204,14 @@ def compute_program_scores(db: Session, institution_id: str):
         )
         pass_rate = (passing / active_students * 100) if active_students > 0 else None
 
-        # Average GPA
-        avg_gpa = (
+        # Average score (converted from 4.0 GPA to 100-point scale)
+        avg_gpa_raw = (
             db.query(func.avg(Student.current_gpa))
             .join(Enrollment, Enrollment.student_id == Student.id)
             .filter(Enrollment.program_id == program.id, Student.is_active == True)
             .scalar()
         )
-        avg_gpa = float(avg_gpa) if avg_gpa else None
+        avg_gpa = round(float(avg_gpa_raw) / 4.0 * 100, 1) if avg_gpa_raw else None
 
         # Dropout rate
         dropped = db.query(func.count()).filter(
