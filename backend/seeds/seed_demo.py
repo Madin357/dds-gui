@@ -57,12 +57,12 @@ def seed():
 
         # ---- Institution 1: University ----
         uni = Institution(
-            name="Baku State Technical University",
+            name="Baku Engineering University",
             type_id=uni_type.id,
-            slug="bstu",
+            slug="beu",
             city="Baku",
-            contact_email="admin@bstu.edu.az",
-            website="https://bstu.edu.az",
+            contact_email="admin@beu.edu.az",
+            website="https://beu.edu.az",
         )
         db.add(uni)
         db.flush()
@@ -70,16 +70,16 @@ def seed():
         uni_admin = User(
             institution_id=uni.id,
             role_id=admin_role.id,
-            email="admin@bstu.edu.az",
+            email="admin@beu.edu.az",
             password_hash=hash_password("demo123"),
-            full_name="Kamran Mammadov",
+            full_name="BEU Admin",
         )
         db.add(uni_admin)
 
         uni_db_path = os.path.abspath(os.path.join(MOCK_PATH, "university", "source.db"))
         uni_sync = SyncJob(
             institution_id=uni.id,
-            name="BSTU Student Information System",
+            name="BEU Student Information System",
             source_type="sqlite",
             connection_config_json=json.dumps({"db_path": uni_db_path}),
             tables_to_sync_json=json.dumps(SYNC_ORDER),
@@ -104,7 +104,7 @@ def seed():
             role_id=admin_role.id,
             email="admin@digitalacademy.az",
             password_hash=hash_password("demo123"),
-            full_name="Aysel Aliyeva",
+            full_name="ADA Admin",
         )
         db.add(academy_admin)
 
@@ -121,7 +121,7 @@ def seed():
 
         db.commit()
         print("Institutions and users created.")
-        print(f"  University login: admin@bstu.edu.az / demo123")
+        print(f"  University login: admin@beu.edu.az / demo123")
         print(f"  Course provider login: admin@digitalacademy.az / demo123")
 
         # ---- Run full sync for both ----

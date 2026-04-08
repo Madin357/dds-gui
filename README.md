@@ -22,5 +22,5 @@ npm run dev
 ```
 
 Open http://localhost:3000 and log in:
-- **University**: admin@bstu.edu.az / demo123
+- **University**: admin@beu.edu.az / demo123
 - **Course provider**: admin@digitalacademy.az / demo123

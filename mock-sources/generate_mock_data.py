@@ -1,6 +1,6 @@
 """
 Generate realistic mock data for two institution types:
-  1. Baku State Technical University (university)
+  1. Baku Engineering University (university)
   2. Azerbaijan Digital Academy (course provider)
 
 Data patterns implemented:
@@ -149,8 +149,8 @@ def generate_university():
         for i in range(count):
             student_id += 1
             fn, ln, gender = random_name()
-            code = f"BSU-{student_id:04d}"
-            email = f"{fn.lower()}.{ln.lower()}@bstu.edu.az"
+            code = f"BEU-{student_id:04d}"
+            email = f"{fn.lower()}.{ln.lower()}@beu.edu.az"
 
             # Distribute semesters: more first-year for growing programs (CS), fewer for declining (Literature)
             if prog_id == 1:  # CS growing

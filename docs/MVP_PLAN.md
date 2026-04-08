@@ -1046,7 +1046,7 @@ src/components/
 
 ## 10. Simulated Demo Data Plan
 
-### Institution 1: Baku State Technical University (mock)
+### Institution 1: Baku Engineering University (mock)
 
 | Attribute | Value |
 |---|---|
@@ -1587,7 +1587,7 @@ If time is extremely tight, cut to this core:
 
 2. **Login as university admin** (15s) — Pre-filled credentials, instant login.
 
-3. **Dashboard** (90s) — "Here's Baku State Technical University at a glance. 587 active students, 92% attendance, but notice: 47 students flagged as at-risk — that's 8% of our student body."
+3. **Dashboard** (90s) — "Here's Baku Engineering University at a glance. 587 active students, 92% attendance, but notice: 47 students flagged as at-risk — that's 8% of our student body."
 
 4. **Student Risk drill-down** (90s) — "Let's look at the at-risk list. This first-year CS student has attendance dropping to 62% over the last month, GPA declined from 2.8 to 2.1. The system detected this automatically from the last sync 12 minutes ago."
 
