@@ -241,6 +241,14 @@
     "Manual Data Entry": "Manual Data Entry"
   },
 
+  "faculties": {
+    "Faculty of Humanities": "Faculty of Humanities",
+    "Faculty of Economics": "Faculty of Economics",
+    "Faculty of Engineering": "Faculty of Engineering",
+    "Faculty of IT": "Faculty of IT",
+    "Faculty of Medicine": "Faculty of Medicine"
+  },
+
   "recommendations": {
     "title": "Recommendations",
     "subtitle": "AI-assisted suggestions based on analytics",

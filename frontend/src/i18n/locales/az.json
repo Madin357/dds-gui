@@ -241,6 +241,14 @@
     "Manual Data Entry": "Manual məlumat daxiletmə"
   },
 
+  "faculties": {
+    "Faculty of Humanities": "Humanitar elmlər fakültəsi",
+    "Faculty of Economics": "İqtisadiyyat fakültəsi",
+    "Faculty of Engineering": "Mühəndislik fakültəsi",
+    "Faculty of IT": "İnformasiya texnologiyaları fakültəsi",
+    "Faculty of Medicine": "Tibb fakültəsi"
+  },
+
   "recommendations": {
     "title": "Tövsiyələr",
     "subtitle": "Analitikaya əsaslanan süni intellekt tövsiyələri",
