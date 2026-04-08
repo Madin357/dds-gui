@@ -62,8 +62,8 @@ export default function SkillsPage() {
           <tbody>
             {trends.map((tr) => (
               <tr key={tr.id} className="border-b border-slate-50">
-                <td className="px-3 py-2.5 text-slate-700 font-medium">{tr.occupation}</td>
-                <td className="px-3 py-2.5 text-slate-500">{tr.sector}</td>
+                <td className="px-3 py-2.5 text-slate-700 font-medium">{t(`occupations.${tr.occupation}` as any) || tr.occupation}</td>
+                <td className="px-3 py-2.5 text-slate-500">{tr.sector ? (t(`sectors.${tr.sector}` as any) || tr.sector) : ""}</td>
                 <td className="px-3 py-2.5 text-center"><DemandBadge level={tr.demand_level} /></td>
                 <td className={`px-3 py-2.5 text-right font-medium ${(tr.growth_rate || 0) > 0 ? "text-green-600" : "text-red-500"}`}>{(tr.growth_rate || 0) > 0 ? "+" : ""}{tr.growth_rate?.toFixed(1)}%</td>
                 <td className="px-3 py-2.5 text-right text-slate-700">{tr.avg_salary_azn?.toLocaleString()}</td>
@@ -79,7 +79,7 @@ export default function SkillsPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
           {skills.map((s) => (
             <div key={s.id} className="bg-white rounded-lg shadow-sm p-4">
-              <div className="flex items-center justify-between mb-2"><h3 className="text-sm font-medium text-slate-700">{s.skill_name}</h3><DemandBadge level={s.demand_level} /></div>
+              <div className="flex items-center justify-between mb-2"><h3 className="text-sm font-medium text-slate-700">{t(`skillNames.${s.skill_name}` as any) || s.skill_name}</h3><DemandBadge level={s.demand_level} /></div>
               <div className="flex items-center justify-between text-xs text-slate-500">
                 <span className="capitalize">{s.category ? (t(`skills.${s.category}` as any) || s.category) : ""}</span>
                 <span className={`font-medium ${(s.growth_rate || 0) > 0 ? "text-green-600" : "text-red-500"}`}>{s.future_outlook === "growing" ? "↑" : s.future_outlook === "declining" ? "↓" : "→"} {s.growth_rate?.toFixed(0)}%</span>

@@ -194,6 +194,53 @@
     "domain": "sahə"
   },
 
+  "occupations": {
+    "AI/ML Engineer": "Süni intellekt/ML mühəndisi",
+    "Data Analyst": "Data analitik",
+    "Cloud Engineer": "Bulud mühəndisi",
+    "DevOps Engineer": "DevOps mühəndisi",
+    "Cybersecurity Specialist": "Kibertəhlükəsizlik mütəxəssisi",
+    "Software Developer": "Proqram təminatı tərtibatçısı",
+    "Web Developer": "Veb tərtibatçı",
+    "UI/UX Designer": "UI/UX dizayner",
+    "Medical Doctor": "Həkim",
+    "Civil Engineer": "Mülki mühəndis",
+    "Project Manager": "Layihə meneceri",
+    "Digital Marketing Specialist": "Rəqəmsal marketinq mütəxəssisi",
+    "Accountant": "Mühasib",
+    "Language Teacher": "Dil müəllimi",
+    "Administrative Assistant": "İnzibati köməkçi"
+  },
+
+  "sectors": {
+    "Technology": "Texnologiya",
+    "Design": "Dizayn",
+    "Healthcare": "Səhiyyə",
+    "Engineering": "Mühəndislik",
+    "Business": "Biznes",
+    "Education": "Təhsil",
+    "General": "Ümumi"
+  },
+
+  "skillNames": {
+    "Machine Learning": "Maşın öyrənməsi",
+    "NLP": "Təbii dilin emalı (NLP)",
+    "Python": "Python",
+    "Cloud Platforms (AWS/Azure)": "Bulud platformaları (AWS/Azure)",
+    "DevOps/CI-CD": "DevOps/CI-CD",
+    "Cybersecurity": "Kibertəhlükəsizlik",
+    "Data Visualization": "Məlumatların vizuallaşdırılması",
+    "API Design": "API dizaynı",
+    "React": "React",
+    "SQL": "SQL",
+    "UX Research": "UX tədqiqatı",
+    "JavaScript": "JavaScript",
+    "Project Management": "Layihə idarəetməsi",
+    "Communication": "Ünsiyyət",
+    "Basic Office Suite": "Əsas ofis proqramları",
+    "Manual Data Entry": "Manual məlumat daxiletmə"
+  },
+
   "recommendations": {
     "title": "Tövsiyələr",
     "subtitle": "Analitikaya əsaslanan süni intellekt tövsiyələri",

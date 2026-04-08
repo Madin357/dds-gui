@@ -194,6 +194,53 @@
     "domain": "Domain"
   },
 
+  "occupations": {
+    "AI/ML Engineer": "AI/ML Engineer",
+    "Data Analyst": "Data Analyst",
+    "Cloud Engineer": "Cloud Engineer",
+    "DevOps Engineer": "DevOps Engineer",
+    "Cybersecurity Specialist": "Cybersecurity Specialist",
+    "Software Developer": "Software Developer",
+    "Web Developer": "Web Developer",
+    "UI/UX Designer": "UI/UX Designer",
+    "Medical Doctor": "Medical Doctor",
+    "Civil Engineer": "Civil Engineer",
+    "Project Manager": "Project Manager",
+    "Digital Marketing Specialist": "Digital Marketing Specialist",
+    "Accountant": "Accountant",
+    "Language Teacher": "Language Teacher",
+    "Administrative Assistant": "Administrative Assistant"
+  },
+
+  "sectors": {
+    "Technology": "Technology",
+    "Design": "Design",
+    "Healthcare": "Healthcare",
+    "Engineering": "Engineering",
+    "Business": "Business",
+    "Education": "Education",
+    "General": "General"
+  },
+
+  "skillNames": {
+    "Machine Learning": "Machine Learning",
+    "NLP": "NLP",
+    "Python": "Python",
+    "Cloud Platforms (AWS/Azure)": "Cloud Platforms (AWS/Azure)",
+    "DevOps/CI-CD": "DevOps/CI-CD",
+    "Cybersecurity": "Cybersecurity",
+    "Data Visualization": "Data Visualization",
+    "API Design": "API Design",
+    "React": "React",
+    "SQL": "SQL",
+    "UX Research": "UX Research",
+    "JavaScript": "JavaScript",
+    "Project Management": "Project Management",
+    "Communication": "Communication",
+    "Basic Office Suite": "Basic Office Suite",
+    "Manual Data Entry": "Manual Data Entry"
+  },
+
   "recommendations": {
     "title": "Recommendations",
     "subtitle": "AI-assisted suggestions based on analytics",
