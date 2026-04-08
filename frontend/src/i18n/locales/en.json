@@ -213,6 +213,22 @@
     "noActive": "No active recommendations"
   },
 
+  "programNames": {
+    "Computer Science": "Computer Science",
+    "Business Administration": "Business Administration",
+    "Civil Engineering": "Civil Engineering",
+    "Medicine": "Medicine",
+    "Azerbaijani Language & Literature": "Azerbaijani Language & Literature",
+    "Web Development Bootcamp": "Web Development Bootcamp",
+    "Data Science Fundamentals": "Data Science Fundamentals",
+    "Digital Marketing": "Digital Marketing",
+    "UI/UX Design": "UI/UX Design",
+    "Cybersecurity Essentials": "Cybersecurity Essentials",
+    "Cloud Computing": "Cloud Computing",
+    "Project Management": "Project Management",
+    "AI & Machine Learning": "AI & Machine Learning"
+  },
+
   "recData": {
     "Launch Data Science Specialization": "Launch Data Science Specialization",
     "Add Cybersecurity Advanced Track": "Add Cybersecurity Advanced Track",

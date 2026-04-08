@@ -46,7 +46,7 @@ export default function SkillsPage() {
           <tbody>
             {alignment.map((a, i) => (
               <tr key={i} className="border-b border-slate-50">
-                <td className="px-3 py-2.5 text-slate-700 font-medium">{a.name}</td>
+                <td className="px-3 py-2.5 text-slate-700 font-medium">{t(`programNames.${a.name}` as any) || a.name}</td>
                 <td className="px-3 py-2.5"><div className="flex items-center gap-2"><div className="w-24 bg-slate-100 rounded-full h-2"><div className={`h-2 rounded-full ${(a.relevance_score || 0) >= 70 ? "bg-green-500" : (a.relevance_score || 0) >= 50 ? "bg-amber-400" : "bg-red-500"}`} style={{ width: `${a.relevance_score || 0}%` }} /></div><span className="text-xs font-medium">{a.relevance_score?.toFixed(0) || "—"}/100</span></div></td>
                 <td className="px-3 py-2.5 text-center"><DemandBadge level={a.demand_trend} /></td>
               </tr>

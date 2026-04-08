@@ -54,7 +54,7 @@ export default function ProgramsPage() {
             {loading ? [...Array(5)].map((_, i) => (<tr key={i}><td colSpan={9} className="px-4 py-3"><div className="h-4 bg-slate-100 rounded animate-pulse" /></td></tr>))
             : programs.map((p) => (
               <tr key={p.id} className="border-b border-slate-50 hover:bg-slate-50">
-                <td className="px-4 py-3"><div><p className="font-medium text-slate-700">{p.name}</p><p className="text-xs text-slate-400">{p.code} • {p.department || p.level}</p></div></td>
+                <td className="px-4 py-3"><div><p className="font-medium text-slate-700">{t(`programNames.${p.name}` as any) || p.name}</p><p className="text-xs text-slate-400">{p.code} • {p.department || p.level}</p></div></td>
                 <td className="px-4 py-3 text-right text-slate-700">{p.student_count ?? "—"}</td>
                 <td className="px-4 py-3 text-right text-slate-700">{p.completion_rate?.toFixed(1) ?? "—"}%</td>
                 <td className="px-4 py-3 text-right text-slate-700">{p.pass_rate?.toFixed(1) ?? "—"}%</td>

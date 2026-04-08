@@ -92,7 +92,7 @@ export default function DashboardPage() {
             <tbody>
               {top_programs.map((p, i) => (
                 <tr key={i} className="border-b border-slate-50">
-                  <td className="py-2.5 text-slate-700">{p.name}</td>
+                  <td className="py-2.5 text-slate-700">{t(`programNames.${p.name}` as any) || p.name}</td>
                   <td className="py-2.5 text-right"><span className={`inline-block px-2 py-0.5 rounded text-xs font-medium ${(p.performance_score || 0) >= 70 ? "bg-green-100 text-green-700" : (p.performance_score || 0) >= 50 ? "bg-amber-100 text-amber-700" : "bg-red-100 text-red-700"}`}>{p.performance_score?.toFixed(0) || "—"}</span></td>
                   <td className="py-2.5 text-right text-slate-600">{p.completion_rate?.toFixed(0) || "—"}%</td>
                 </tr>
@@ -106,10 +106,10 @@ export default function DashboardPage() {
           <div className="space-y-3">
             {recent_recommendations.map((r) => (
               <div key={r.id} className="flex items-start gap-3 p-3 bg-slate-50 rounded-lg">
-                <span className={`shrink-0 mt-0.5 px-2 py-0.5 rounded text-xs font-medium ${r.category === "new_program" ? "bg-blue-100 text-blue-700" : r.category === "intervention" ? "bg-red-100 text-red-700" : r.category === "curriculum" ? "bg-purple-100 text-purple-700" : "bg-slate-200 text-slate-600"}`}>{r.category.replace("_", " ")}</span>
+                <span className={`shrink-0 mt-0.5 px-2 py-0.5 rounded text-xs font-medium ${r.category === "new_program" ? "bg-blue-100 text-blue-700" : r.category === "intervention" ? "bg-red-100 text-red-700" : r.category === "curriculum" ? "bg-purple-100 text-purple-700" : "bg-slate-200 text-slate-600"}`}>{{ new_program: t("recommendations.newProgram"), curriculum: t("recommendations.curriculum"), intervention: t("recommendations.intervention"), resource: t("recommendations.resource"), policy: t("recommendations.policy") }[r.category] || r.category}</span>
                 <div className="min-w-0">
-                  <p className="text-sm font-medium text-slate-700 truncate">{r.title}</p>
-                  <p className="text-xs text-slate-400">{r.level} {t("dashboard.level")} • {t("dashboard.priority")}: {r.priority_score?.toFixed(0) || "—"}</p>
+                  <p className="text-sm font-medium text-slate-700 truncate">{t(`recData.${r.title}` as any) || r.title}</p>
+                  <p className="text-xs text-slate-400">{{ institution: t("recommendations.institution"), program: t("recommendations.program"), student: t("recommendations.student") }[r.level] || r.level} {t("dashboard.level")} • {t("dashboard.priority")}: {r.priority_score?.toFixed(0) || "—"}</p>
                 </div>
               </div>
             ))}
