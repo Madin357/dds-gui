@@ -57,8 +57,8 @@ export default function SettingsPage() {
         <div className="bg-white rounded-lg shadow-sm p-6">
           <h2 className="text-sm font-semibold text-slate-700 mb-3">{t("settings.lastSyncRun")}</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
-            <div><span className="text-slate-500">{t("settings.statusLabel")}</span><p className={`font-medium capitalize ${syncStatus.last_sync.status === "completed" ? "text-green-600" : syncStatus.last_sync.status === "failed" ? "text-red-600" : "text-amber-600"}`}>{syncStatus.last_sync.status}</p></div>
-            <div><span className="text-slate-500">{t("settings.typeLabel")}</span><p className="font-medium text-slate-700 capitalize">{syncStatus.last_sync.sync_type}</p></div>
+            <div><span className="text-slate-500">{t("settings.statusLabel")}</span><p className={`font-medium ${syncStatus.last_sync.status === "completed" ? "text-green-600" : syncStatus.last_sync.status === "failed" ? "text-red-600" : "text-amber-600"}`}>{syncStatusLabel(syncStatus.last_sync.status)}</p></div>
+            <div><span className="text-slate-500">{t("settings.typeLabel")}</span><p className="font-medium text-slate-700">{syncTypeLabel(syncStatus.last_sync.sync_type)}</p></div>
             <div><span className="text-slate-500">{t("settings.duration")}</span><p className="font-medium text-slate-700">{syncStatus.last_sync.duration_ms ? `${(syncStatus.last_sync.duration_ms / 1000).toFixed(1)}s` : "—"}</p></div>
             <div><span className="text-slate-500">{t("settings.failedRecords")}</span><p className={`font-medium ${syncStatus.last_sync.records_failed > 0 ? "text-red-600" : "text-slate-700"}`}>{syncStatus.last_sync.records_failed}</p></div>
           </div>
@@ -79,7 +79,7 @@ export default function SettingsPage() {
           <tbody>
             {jobs.map((j) => (
               <tr key={j.id} className="border-b border-slate-50">
-                <td className="px-3 py-3 font-medium text-slate-700">{j.name}</td>
+                <td className="px-3 py-3 font-medium text-slate-700">{t(`syncJobNames.${j.name}` as any) || j.name}</td>
                 <td className="px-3 py-3 text-slate-500 uppercase text-xs">{j.source_type}</td>
                 <td className="px-3 py-3 text-center"><span className={`px-2 py-0.5 rounded text-xs font-medium ${j.is_active ? "bg-green-100 text-green-700" : "bg-slate-100 text-slate-500"}`}>{j.is_active ? t("common.active") : t("common.inactive")}</span></td>
                 <td className="px-3 py-3 text-slate-500 text-xs font-mono">{j.schedule_cron || t("settings.manual")}</td>
