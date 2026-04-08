@@ -81,7 +81,7 @@ export default function SkillsPage() {
             <div key={s.id} className="bg-white rounded-lg shadow-sm p-4">
               <div className="flex items-center justify-between mb-2"><h3 className="text-sm font-medium text-slate-700">{s.skill_name}</h3><DemandBadge level={s.demand_level} /></div>
               <div className="flex items-center justify-between text-xs text-slate-500">
-                <span className="capitalize">{s.category}</span>
+                <span className="capitalize">{s.category ? (t(`skills.${s.category}` as any) || s.category) : ""}</span>
                 <span className={`font-medium ${(s.growth_rate || 0) > 0 ? "text-green-600" : "text-red-500"}`}>{s.future_outlook === "growing" ? "↑" : s.future_outlook === "declining" ? "↓" : "→"} {s.growth_rate?.toFixed(0)}%</span>
               </div>
             </div>
