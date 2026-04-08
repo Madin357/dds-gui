@@ -13,11 +13,19 @@ router = APIRouter(prefix="/sync", tags=["sync"])
 async def list_sync_jobs(user: CurrentUser, db: DB):
     query = select(SyncJob).where(SyncJob.institution_id == user.institution_id).order_by(SyncJob.created_at.desc())
     result = await db.execute(query)
-    return [SyncJobResponse.model_validate(j) for j in result.scalars().all()]
+    jobs = result.scalars().all()
+    return [
+        SyncJobResponse(
+            id=j.id, name=j.name, source_type=j.source_type,
+            is_active=j.is_active, schedule_cron=j.schedule_cron,
+            tables_to_sync=j.tables_to_sync, created_at=j.created_at,
+        )
+        for j in jobs
+    ]
 
 
 @router.get("/jobs/{job_id}/runs", response_model=list[SyncJobRunResponse])
-async def list_sync_runs(job_id: uuid.UUID, user: CurrentUser, db: DB):
+async def list_sync_runs(job_id: str, user: CurrentUser, db: DB):
     # Verify job belongs to institution
     job_q = select(SyncJob).where(SyncJob.id == job_id, SyncJob.institution_id == user.institution_id)
     job = (await db.execute(job_q)).scalar_one_or_none()
@@ -30,17 +38,28 @@ async def list_sync_runs(job_id: uuid.UUID, user: CurrentUser, db: DB):
 
 
 @router.post("/jobs/{job_id}/trigger")
-async def trigger_sync(job_id: uuid.UUID, req: TriggerSyncRequest, user: CurrentUser, db: DB):
+async def trigger_sync(job_id: str, req: TriggerSyncRequest, user: CurrentUser, db: DB):
     job_q = select(SyncJob).where(SyncJob.id == job_id, SyncJob.institution_id == user.institution_id)
     job = (await db.execute(job_q)).scalar_one_or_none()
     if not job:
         raise HTTPException(status_code=404, detail="Sync job not found")
 
-    # Trigger Celery task
-    from app.tasks.sync_tasks import run_sync_job
-    task = run_sync_job.delay(str(job_id), req.sync_type)
+    # Run sync in a background thread
+    import threading
+    from app.database import SyncSessionLocal
+    from app.sync.engine import run_sync
+    from app.sync.loaders.postgres_loader import clear_caches
 
-    return {"message": f"Sync triggered ({req.sync_type})", "task_id": task.id}
+    def _run():
+        sync_db = SyncSessionLocal()
+        try:
+            clear_caches()
+            run_sync(sync_db, str(job_id), req.sync_type)
+        finally:
+            sync_db.close()
+
+    threading.Thread(target=_run, daemon=True).start()
+    return {"message": f"Sync triggered ({req.sync_type})"}
 
 
 @router.get("/status", response_model=SyncStatusResponse)

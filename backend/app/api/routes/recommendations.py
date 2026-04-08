@@ -31,7 +31,7 @@ async def list_recommendations(
         query = query.where(Recommendation.category == category)
     if status:
         query = query.where(Recommendation.status == status)
-    query = query.order_by(Recommendation.priority_score.desc().nullslast())
+    query = query.order_by(Recommendation.priority_score.desc())
 
     result = await db.execute(query)
     items = [RecommendationResponse.model_validate(r) for r in result.scalars().all()]
@@ -39,7 +39,7 @@ async def list_recommendations(
 
 
 @router.get("/recommendations/{rec_id}", response_model=RecommendationResponse)
-async def get_recommendation(rec_id: uuid.UUID, user: CurrentUser, db: DB):
+async def get_recommendation(rec_id: str, user: CurrentUser, db: DB):
     result = await db.execute(
         select(Recommendation).where(Recommendation.id == rec_id, Recommendation.institution_id == user.institution_id)
     )
@@ -50,7 +50,7 @@ async def get_recommendation(rec_id: uuid.UUID, user: CurrentUser, db: DB):
 
 
 @router.put("/recommendations/{rec_id}/status")
-async def update_recommendation_status(rec_id: uuid.UUID, req: UpdateRecommendationStatus, user: CurrentUser, db: DB):
+async def update_recommendation_status(rec_id: str, req: UpdateRecommendationStatus, user: CurrentUser, db: DB):
     result = await db.execute(
         select(Recommendation).where(Recommendation.id == rec_id, Recommendation.institution_id == user.institution_id)
     )
@@ -66,14 +66,14 @@ async def update_recommendation_status(rec_id: uuid.UUID, req: UpdateRecommendat
 
 @router.get("/labour-market/trends", response_model=list[LabourMarketTrendResponse])
 async def list_labour_market_trends(user: CurrentUser, db: DB):
-    query = select(LabourMarketTrend).order_by(LabourMarketTrend.growth_rate.desc().nullslast()).limit(50)
+    query = select(LabourMarketTrend).order_by(LabourMarketTrend.growth_rate.desc()).limit(50)
     result = await db.execute(query)
     return [LabourMarketTrendResponse.model_validate(r) for r in result.scalars().all()]
 
 
 @router.get("/labour-market/skills", response_model=list[SkillTrendResponse])
 async def list_skill_trends(user: CurrentUser, db: DB):
-    query = select(SkillTrend).order_by(SkillTrend.growth_rate.desc().nullslast()).limit(50)
+    query = select(SkillTrend).order_by(SkillTrend.growth_rate.desc()).limit(50)
     result = await db.execute(query)
     return [SkillTrendResponse.model_validate(r) for r in result.scalars().all()]
 
@@ -88,7 +88,7 @@ async def programme_alignment(user: CurrentUser, db: DB):
         select(Program.name, Program.code, AnalyticsProgramScore.relevance_score, AnalyticsProgramScore.demand_trend)
         .join(AnalyticsProgramScore, AnalyticsProgramScore.program_id == Program.id)
         .where(Program.institution_id == user.institution_id)
-        .order_by(AnalyticsProgramScore.relevance_score.desc().nullslast())
+        .order_by(AnalyticsProgramScore.relevance_score.desc())
     )
     result = await db.execute(query)
     return [

@@ -103,13 +103,17 @@ def upsert_records(
                 if set_clause:
                     resolved["_existing_id"] = str(existing[0])
                     db.execute(
-                        text(f"UPDATE {target_table} SET {set_clause}, updated_at = NOW() WHERE id = :_existing_id"),
+                        text(f"UPDATE {target_table} SET {set_clause}, updated_at = datetime('now') WHERE id = :_existing_id"),
                         resolved,
                     )
             else:
-                # INSERT
+                # INSERT — add timestamps and id
+                from datetime import datetime, timezone
                 new_id = str(uuid.uuid4())
                 resolved["id"] = new_id
+                now = datetime.now(timezone.utc).isoformat()
+                resolved["created_at"] = now
+                resolved["updated_at"] = now
                 cols = ", ".join(resolved.keys())
                 vals = ", ".join(f":{k}" for k in resolved.keys())
                 db.execute(text(f"INSERT INTO {target_table} ({cols}) VALUES ({vals})"), resolved)

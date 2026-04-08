@@ -1,16 +1,15 @@
 from pydantic import BaseModel
 from typing import Optional
 from datetime import datetime
-import uuid
 
 
 class SyncJobResponse(BaseModel):
-    id: uuid.UUID
+    id: str
     name: str
     source_type: str
     is_active: bool
     schedule_cron: Optional[str] = None
-    tables_to_sync: list[str]
+    tables_to_sync: list[str] = []
     created_at: datetime
 
     class Config:
@@ -18,8 +17,8 @@ class SyncJobResponse(BaseModel):
 
 
 class SyncJobRunResponse(BaseModel):
-    id: uuid.UUID
-    sync_job_id: uuid.UUID
+    id: str
+    sync_job_id: str
     status: str
     sync_type: str
     started_at: datetime
@@ -41,4 +40,4 @@ class SyncStatusResponse(BaseModel):
 
 
 class TriggerSyncRequest(BaseModel):
-    sync_type: str = "incremental"  # 'full' or 'incremental'
+    sync_type: str = "incremental"

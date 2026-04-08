@@ -5,6 +5,7 @@ computes analytics, and seeds labour market data + recommendations.
 Usage: python -m seeds.seed_demo
 """
 
+import json
 import os
 import sys
 import uuid
@@ -80,8 +81,8 @@ def seed():
             institution_id=uni.id,
             name="BSTU Student Information System",
             source_type="sqlite",
-            connection_config={"db_path": uni_db_path},
-            tables_to_sync=SYNC_ORDER,
+            connection_config_json=json.dumps({"db_path": uni_db_path}),
+            tables_to_sync_json=json.dumps(SYNC_ORDER),
             schedule_cron="*/15 * * * *",
         )
         db.add(uni_sync)
@@ -112,8 +113,8 @@ def seed():
             institution_id=academy.id,
             name="ADA Learning Management System",
             source_type="sqlite",
-            connection_config={"db_path": academy_db_path},
-            tables_to_sync=SYNC_ORDER,
+            connection_config_json=json.dumps({"db_path": academy_db_path}),
+            tables_to_sync_json=json.dumps(SYNC_ORDER),
             schedule_cron="*/15 * * * *",
         )
         db.add(academy_sync)

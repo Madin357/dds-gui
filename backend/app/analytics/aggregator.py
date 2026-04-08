@@ -3,6 +3,7 @@ Analytics aggregator — computes all scores and KPIs for an institution.
 Runs as a Celery task or can be triggered manually.
 """
 
+import json
 import uuid
 import logging
 from datetime import datetime, timezone
@@ -55,7 +56,7 @@ PROGRAM_MARKET_DATA = {
 
 def compute_student_scores(db: Session, institution_id: str):
     """Compute dropout risk and performance risk for all students of an institution."""
-    inst_uuid = uuid.UUID(institution_id)
+    inst_uuid = institution_id
     students = db.query(Student).filter(Student.institution_id == inst_uuid, Student.is_active == True).all()
     logger.info(f"Computing scores for {len(students)} active students in {institution_id}")
 
@@ -132,14 +133,14 @@ def compute_student_scores(db: Session, institution_id: str):
             gpa, prog_avg, avg_score, attendance_rate, fail_pct,
         )
 
-        risk_factors = {
+        risk_factors = json.dumps({
             "attendance_rate": round(attendance_rate, 1) if attendance_rate else None,
             "gpa": gpa,
             "assessment_completion": round(completion_pct, 1) if completion_pct else None,
             "semester": student.current_semester,
             "gpa_trend": gpa_trend,
             "failed_assessments_pct": round(fail_pct, 1) if fail_pct else None,
-        }
+        })
 
         # Upsert analytics score
         existing = db.query(AnalyticsStudentScore).filter(
@@ -173,7 +174,7 @@ def compute_student_scores(db: Session, institution_id: str):
 
 def compute_program_scores(db: Session, institution_id: str):
     """Compute program performance and relevance scores."""
-    inst_uuid = uuid.UUID(institution_id)
+    inst_uuid = institution_id
     programs = db.query(Program).filter(Program.institution_id == inst_uuid).all()
 
     for program in programs:
@@ -278,7 +279,7 @@ def compute_program_scores(db: Session, institution_id: str):
 
 def compute_institution_kpis(db: Session, institution_id: str):
     """Compute and cache institution-level KPIs."""
-    inst_uuid = uuid.UUID(institution_id)
+    inst_uuid = institution_id
 
     total = db.query(func.count()).filter(Student.institution_id == inst_uuid).scalar() or 0
     active = db.query(func.count()).filter(Student.institution_id == inst_uuid, Student.is_active == True).scalar() or 0

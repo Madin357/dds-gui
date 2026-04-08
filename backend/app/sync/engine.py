@@ -88,7 +88,7 @@ SYNC_ORDER = ["programs", "courses", "students", "enrollments", "attendance", "a
 
 def run_sync(db_session: Session, sync_job_id: str, sync_type: str = "incremental"):
     """Execute a sync job (full or incremental)."""
-    job = db_session.query(SyncJob).filter(SyncJob.id == uuid.UUID(sync_job_id)).first()
+    job = db_session.query(SyncJob).filter(SyncJob.id == sync_job_id).first()
     if not job:
         logger.error(f"Sync job {sync_job_id} not found")
         return
@@ -143,6 +143,7 @@ def run_sync(db_session: Session, sync_job_id: str, sync_type: str = "incrementa
                 transformed = transform_records(
                     records, config["field_map"],
                     institution_id=str(job.institution_id),
+                    target_table=config["target_table"],
                 )
 
                 # Load

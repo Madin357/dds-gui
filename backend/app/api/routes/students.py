@@ -1,4 +1,5 @@
 from typing import Optional
+import json
 import uuid
 
 from fastapi import APIRouter, Query
@@ -28,7 +29,7 @@ async def list_students(
     page: int = Query(1, ge=1),
     page_size: int = Query(20, ge=1, le=100),
     search: Optional[str] = None,
-    program_id: Optional[uuid.UUID] = None,
+    program_id: Optional[str] = None,
     status: Optional[str] = None,
     risk_level: Optional[str] = None,
 ):
@@ -130,14 +131,14 @@ async def at_risk_students(user: CurrentUser, db: DB, limit: int = Query(20, le=
             "performance_risk": float(a.performance_risk) if a.performance_risk else None,
             "attendance_rate": float(a.attendance_rate) if a.attendance_rate else None,
             "gpa_trend": a.gpa_trend,
-            "risk_factors": a.risk_factors,
+            "risk_factors": json.loads(a.risk_factors) if a.risk_factors else None,
         }
         for s, a in rows
     ]
 
 
 @router.get("/{student_id}", response_model=StudentDetailResponse)
-async def get_student(student_id: uuid.UUID, user: CurrentUser, db: DB):
+async def get_student(student_id: str, user: CurrentUser, db: DB):
     # Get student with analytics
     query = (
         select(Student, AnalyticsStudentScore)
@@ -179,13 +180,13 @@ async def get_student(student_id: uuid.UUID, user: CurrentUser, db: DB):
         attendance_rate=float(analytics.attendance_rate) if analytics and analytics.attendance_rate else None,
         avg_score=float(analytics.avg_score) if analytics and analytics.avg_score else None,
         gpa_trend=analytics.gpa_trend if analytics else None,
-        risk_factors=analytics.risk_factors if analytics else None,
+        risk_factors=json.loads(analytics.risk_factors) if analytics and analytics.risk_factors else None,
         program_name=program_name,
     )
 
 
 @router.get("/{student_id}/attendance", response_model=list[AttendanceResponse])
-async def get_student_attendance(student_id: uuid.UUID, user: CurrentUser, db: DB):
+async def get_student_attendance(student_id: str, user: CurrentUser, db: DB):
     query = (
         select(AttendanceRecord, Course.name.label("course_name"))
         .join(Course, Course.id == AttendanceRecord.course_id)
@@ -206,7 +207,7 @@ async def get_student_attendance(student_id: uuid.UUID, user: CurrentUser, db: D
 
 
 @router.get("/{student_id}/assessments", response_model=list[AssessmentResponse])
-async def get_student_assessments(student_id: uuid.UUID, user: CurrentUser, db: DB):
+async def get_student_assessments(student_id: str, user: CurrentUser, db: DB):
     query = (
         select(Assessment, Course.name.label("course_name"))
         .join(Course, Course.id == Assessment.course_id)

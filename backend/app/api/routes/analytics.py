@@ -98,7 +98,7 @@ async def get_dashboard(user: CurrentUser, db: DB):
         select(Program.name, AnalyticsProgramScore.performance_score, AnalyticsProgramScore.completion_rate)
         .join(AnalyticsProgramScore, AnalyticsProgramScore.program_id == Program.id)
         .where(Program.institution_id == inst_id)
-        .order_by(AnalyticsProgramScore.performance_score.desc().nullslast())
+        .order_by(AnalyticsProgramScore.performance_score.desc())
         .limit(5)
     )
     top_result = await db.execute(top_progs_q)
@@ -112,7 +112,7 @@ async def get_dashboard(user: CurrentUser, db: DB):
     rec_q = (
         select(Recommendation)
         .where(Recommendation.institution_id == inst_id, Recommendation.status == "active")
-        .order_by(Recommendation.priority_score.desc().nullslast())
+        .order_by(Recommendation.priority_score.desc())
         .limit(5)
     )
     rec_result = await db.execute(rec_q)

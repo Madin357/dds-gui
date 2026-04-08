@@ -63,7 +63,7 @@ async def compare_programs(user: CurrentUser, db: DB):
         select(Program, AnalyticsProgramScore)
         .outerjoin(AnalyticsProgramScore, AnalyticsProgramScore.program_id == Program.id)
         .where(Program.institution_id == user.institution_id, Program.is_active == True)
-        .order_by(AnalyticsProgramScore.performance_score.desc().nullslast())
+        .order_by(AnalyticsProgramScore.performance_score.desc())
     )
     result = await db.execute(query)
     rows = result.all()
@@ -86,7 +86,7 @@ async def compare_programs(user: CurrentUser, db: DB):
 
 
 @router.get("/{program_id}")
-async def get_program(program_id: uuid.UUID, user: CurrentUser, db: DB):
+async def get_program(program_id: str, user: CurrentUser, db: DB):
     query = (
         select(Program, AnalyticsProgramScore)
         .outerjoin(AnalyticsProgramScore, AnalyticsProgramScore.program_id == Program.id)
@@ -129,7 +129,7 @@ async def get_program(program_id: uuid.UUID, user: CurrentUser, db: DB):
 
 
 @router.get("/{program_id}/courses", response_model=list[CourseResponse])
-async def get_program_courses(program_id: uuid.UUID, user: CurrentUser, db: DB):
+async def get_program_courses(program_id: str, user: CurrentUser, db: DB):
     query = (
         select(Course)
         .where(Course.program_id == program_id, Course.institution_id == user.institution_id)
