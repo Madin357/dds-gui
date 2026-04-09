@@ -12,6 +12,9 @@ class Settings(BaseSettings):
     # Environment: "development" or "production"
     ENVIRONMENT: str = "development"
 
+    # Demo mode: run without any database, serve mock data
+    DEMO_MODE: bool = False
+
     # Security
     SECRET_KEY: str = "dev-secret-key-change-in-production"
 
