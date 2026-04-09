@@ -124,25 +124,38 @@ def seed():
         print(f"  University login: admin@beu.edu.az / demo123")
         print(f"  Course provider login: admin@digitalacademy.az / demo123")
 
-        # ---- Run full sync for both ----
-        print("\nRunning full sync for University...")
-        clear_caches()
-        run_sync(db, str(uni_sync.id), "full")
+        # ---- Run full sync for both (requires mock source DBs) ----
+        sync_ok = False
+        try:
+            print("\nRunning full sync for University...")
+            clear_caches()
+            run_sync(db, str(uni_sync.id), "full")
 
-        print("Running full sync for Course Provider...")
-        clear_caches()
-        run_sync(db, str(academy_sync.id), "full")
+            print("Running full sync for Course Provider...")
+            clear_caches()
+            run_sync(db, str(academy_sync.id), "full")
+            sync_ok = True
+        except Exception as e:
+            print(f"\n  WARNING: Sync failed ({e})")
+            print("  This is expected if mock source DBs are not available.")
+            print("  Login will still work. Dashboard will show empty data.")
 
-        # ---- Compute analytics ----
-        print("\nComputing analytics for University...")
-        compute_student_scores(db, str(uni.id))
-        compute_program_scores(db, str(uni.id))
-        compute_institution_kpis(db, str(uni.id))
+        # ---- Compute analytics (requires synced data) ----
+        if sync_ok:
+            try:
+                print("\nComputing analytics for University...")
+                compute_student_scores(db, str(uni.id))
+                compute_program_scores(db, str(uni.id))
+                compute_institution_kpis(db, str(uni.id))
 
-        print("Computing analytics for Course Provider...")
-        compute_student_scores(db, str(academy.id))
-        compute_program_scores(db, str(academy.id))
-        compute_institution_kpis(db, str(academy.id))
+                print("Computing analytics for Course Provider...")
+                compute_student_scores(db, str(academy.id))
+                compute_program_scores(db, str(academy.id))
+                compute_institution_kpis(db, str(academy.id))
+            except Exception as e:
+                print(f"\n  WARNING: Analytics computation failed ({e})")
+        else:
+            print("\nSkipping analytics (no synced data).")
 
         # ---- Seed labour market data ----
         print("\nSeeding labour market & skills data...")
