@@ -50,7 +50,10 @@ export async function apiFetch<T = unknown>(
     }
     localStorage.removeItem("access_token");
     localStorage.removeItem("refresh_token");
-    window.location.href = "/login";
+    // Auto-re-login with demo credentials instead of redirecting to login page
+    const { autoLoginDemo } = await import("./auth");
+    await autoLoginDemo();
+    window.location.href = "/dashboard";
   }
 
   if (!res.ok) {

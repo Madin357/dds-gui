@@ -5,11 +5,6 @@ import { useRouter } from "next/navigation";
 
 export default function RootPage() {
   const router = useRouter();
-
-  useEffect(() => {
-    const token = localStorage.getItem("access_token");
-    router.replace(token ? "/dashboard" : "/login");
-  }, [router]);
-
+  useEffect(() => { router.replace("/dashboard"); }, [router]);
   return null;
 }

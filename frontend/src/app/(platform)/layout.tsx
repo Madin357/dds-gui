@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
-import { getMe, logout, type User } from "@/lib/auth";
+import { getMe, autoLoginDemo, logout, type User } from "@/lib/auth";
 import { useI18n } from "@/i18n";
 import LanguageSwitcher from "@/components/ui/LanguageSwitcher";
 
@@ -32,9 +32,22 @@ export default function PlatformLayout({ children }: { children: React.ReactNode
   const { t } = useI18n();
 
   useEffect(() => {
-    const token = localStorage.getItem("access_token");
-    if (!token) { router.push("/login"); return; }
-    getMe().then(setUser).catch(() => router.push("/login")).finally(() => setLoading(false));
+    async function init() {
+      let token = localStorage.getItem("access_token");
+      if (!token) {
+        await autoLoginDemo();
+        token = localStorage.getItem("access_token");
+      }
+      if (!token) { setLoading(false); return; }
+      try {
+        setUser(await getMe());
+      } catch {
+        await autoLoginDemo();
+        try { setUser(await getMe()); } catch { /* demo backend unreachable */ }
+      }
+      setLoading(false);
+    }
+    init();
   }, [router]);
 
   if (loading) {

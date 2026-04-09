@@ -11,6 +11,9 @@ export interface User {
   institution_name: string;
 }
 
+const DEMO_EMAIL = "admin@beu.edu.az";
+const DEMO_PASSWORD = "demo123";
+
 export async function login(email: string, password: string) {
   const data = await apiFetch<{
     access_token: string;
@@ -24,6 +27,15 @@ export async function login(email: string, password: string) {
   return data;
 }
 
+export async function autoLoginDemo(): Promise<boolean> {
+  try {
+    await login(DEMO_EMAIL, DEMO_PASSWORD);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 export async function getMe(): Promise<User> {
   return apiFetch<User>("/auth/me");
 }
@@ -31,7 +43,7 @@ export async function getMe(): Promise<User> {
 export function logout() {
   localStorage.removeItem("access_token");
   localStorage.removeItem("refresh_token");
-  window.location.href = "/login";
+  window.location.href = "/dashboard";
 }
 
 export function isAuthenticated(): boolean {
