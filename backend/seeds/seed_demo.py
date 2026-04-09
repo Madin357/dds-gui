@@ -2,7 +2,9 @@
 Seed script: creates demo institutions, users, sync jobs, runs full sync,
 computes analytics, and seeds labour market data + recommendations.
 
-Usage: python -m seeds.seed_demo
+Usage:
+  python -m seeds.seed_demo           # seed (skip if already done)
+  python -m seeds.seed_demo --reset   # wipe all data and re-seed from scratch
 """
 
 import json
@@ -10,6 +12,8 @@ import os
 import sys
 import uuid
 from datetime import date, datetime, timezone
+
+from sqlalchemy import text
 
 # Add backend to path
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -25,9 +29,30 @@ from app.analytics.aggregator import compute_student_scores, compute_program_sco
 settings = get_settings()
 MOCK_PATH = os.environ.get("MOCK_SOURCES_PATH", settings.MOCK_SOURCES_PATH)
 
+# Reverse FK-dependency order for safe deletion
+_ALL_DATA_TABLES = [
+    "audit_logs", "integration_errors", "sync_checkpoints",
+    "sync_job_runs", "sync_jobs", "field_mappings",
+    "analytics_institution_kpis", "analytics_program_scores",
+    "analytics_student_scores", "recommendations",
+    "student_statuses", "assessments", "attendance_records",
+    "enrollments", "students", "courses", "programs",
+    "labour_market_trends", "skill_trends",
+    "users", "institutions", "roles", "institution_types",
+]
+
+
+def _reset_all_data(db):
+    """Delete all data from every table in safe FK order."""
+    print("Resetting: deleting all data...")
+    for table_name in _ALL_DATA_TABLES:
+        db.execute(text(f"DELETE FROM {table_name}"))
+    db.commit()
+    print("All data cleared.\n")
+
 
 def seed():
-    # Create all tables
+    # Create all tables (no-op if alembic already created them)
     Base.metadata.create_all(sync_engine)
 
     db = SyncSessionLocal()
@@ -35,9 +60,12 @@ def seed():
         # Check if already seeded
         existing = db.query(Institution).first()
         if existing:
-            print("Database already seeded. Skipping.")
-            print("  To re-seed, drop and recreate the database.")
-            return
+            if "--reset" in sys.argv:
+                _reset_all_data(db)
+            else:
+                print("Database already seeded. Skipping.")
+                print("  To re-seed, run: python -m seeds.seed_demo --reset")
+                return
 
         # Seed institution types and roles (if migration didn't run)
         if not db.query(InstitutionType).first():

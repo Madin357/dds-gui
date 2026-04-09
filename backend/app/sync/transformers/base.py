@@ -9,6 +9,24 @@ _TABLES_WITH_IS_ACTIVE = {"programs", "courses", "students"}
 # Tables that have max_score NOT NULL column
 _TABLES_WITH_MAX_SCORE = {"assessments"}
 
+# Columns that are boolean in the platform schema
+BOOLEAN_COLUMNS = {"is_active", "ai_generated", "resolved"}
+
+
+def to_bool(value) -> bool:
+    """Convert boolean-like values (int, str, etc.) to Python bool.
+
+    SQLite stores booleans as integers (1/0). PostgreSQL requires real
+    boolean values. This normalizes any variant to a proper Python bool.
+    """
+    if isinstance(value, bool):
+        return value
+    if isinstance(value, int):
+        return value != 0
+    if isinstance(value, str):
+        return value.lower() in ("1", "true", "yes", "t", "y")
+    return False
+
 
 def transform_records(
     records: list[dict],
@@ -31,13 +49,18 @@ def transform_records(
         # Handle student status → is_active conversion
         if "_status" in row:
             status_val = row.pop("_status")
-            row["is_active"] = 1 if status_val in ("active", "probation") else 0
+            row["is_active"] = status_val in ("active", "probation")
 
         # Add defaults for NOT NULL columns
         if target_table in _TABLES_WITH_IS_ACTIVE and "is_active" not in row:
-            row["is_active"] = 1
+            row["is_active"] = True
         if target_table in _TABLES_WITH_MAX_SCORE and "max_score" not in row:
             row["max_score"] = 100
+
+        # Normalize all boolean columns to Python bool
+        for col in BOOLEAN_COLUMNS:
+            if col in row:
+                row[col] = to_bool(row[col])
 
         transformed.append(row)
 

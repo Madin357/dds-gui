@@ -131,7 +131,7 @@ def generate_university():
 
     # Students — enrollment size reflects trends
     # CS: growing (more recent students), Literature: declining
-    program_student_counts = {1: 160, 2: 130, 3: 110, 4: 100, 5: 80}  # total ~580
+    program_student_counts = {1: 35, 2: 28, 3: 22, 4: 20, 5: 15}  # total ~120
     # Difficulty / base GPA ranges per program
     program_profiles = {
         1: {"base_gpa": 3.1, "gpa_std": 0.6, "attendance_base": 82, "dropout_pct": 0.10},
@@ -234,12 +234,11 @@ def generate_university():
             continue  # some dropped students have no recent data
 
         prog_courses = course_by_program.get(prog_id, [])
-        # Each student takes 2-3 courses per semester
-        student_courses = random.sample(prog_courses, min(3, len(prog_courses)))
+        # Each student takes 2 courses per semester
+        student_courses = random.sample(prog_courses, min(2, len(prog_courses)))
 
         for cid in student_courses:
-            # ~2 sessions per week per course, sample some dates
-            n_sessions = random.randint(15, 25)
+            n_sessions = random.randint(3, 5)
             dates = random.sample(session_dates, min(n_sessions, len(session_dates)))
             for sd in dates:
                 if random.random() * 100 < att_pct:
@@ -252,13 +251,13 @@ def generate_university():
                 )
 
     # Assessments
-    assessment_types = ["midterm", "assignment", "quiz", "final"]
+    assessment_types = ["midterm", "final"]
     for sid, prog_id, semester, att_pct, gpa, status in all_students:
         if status == "dropped" and random.random() < 0.3:
             continue
 
         prog_courses = course_by_program.get(prog_id, [])
-        student_courses = random.sample(prog_courses, min(3, len(prog_courses)))
+        student_courses = random.sample(prog_courses, min(2, len(prog_courses)))
 
         for cid in student_courses:
             for atype in assessment_types:
@@ -337,7 +336,7 @@ def generate_course_provider():
             )
 
     # Students per program (reflects demand)
-    program_student_counts = {1: 45, 2: 50, 3: 30, 4: 25, 5: 20, 6: 22, 7: 18, 8: 40}  # ~250
+    program_student_counts = {1: 14, 2: 16, 3: 10, 4: 8, 5: 8, 6: 8, 7: 6, 8: 12}  # ~82
     program_profiles = {
         1: {"completion": 0.80, "attendance_base": 82, "score_base": 72},
         2: {"completion": 0.75, "attendance_base": 80, "score_base": 68},
@@ -423,8 +422,9 @@ def generate_course_provider():
         if status == "dropped" and cohort >= 2:
             continue
         prog_courses = course_by_program.get(prog_id, [])
-        for cid in prog_courses:
-            n_sessions = random.randint(10, 18)
+        student_courses = random.sample(prog_courses, min(2, len(prog_courses)))
+        for cid in student_courses:
+            n_sessions = random.randint(3, 5)
             dates = random.sample(session_dates, min(n_sessions, len(session_dates)))
             for sd in dates:
                 if random.random() * 100 < att_pct:
@@ -442,8 +442,9 @@ def generate_course_provider():
             continue
         profile = program_profiles[prog_id]
         prog_courses = course_by_program.get(prog_id, [])
-        for cid in prog_courses:
-            for atype in ["quiz", "assignment", "project"]:
+        student_courses = random.sample(prog_courses, min(2, len(prog_courses)))
+        for cid in student_courses:
+            for atype in ["quiz", "project"]:
                 att_factor = (att_pct - 50) / 50
                 base = profile["score_base"] + att_factor * 15 + random.gauss(0, 8)
                 score = max(15, min(100, round(base, 1)))
