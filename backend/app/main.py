@@ -1,7 +1,11 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from sqlalchemy import text
 
+from app.config import get_settings
 from app.api.routes import auth, students, programs, analytics, sync_routes, recommendations
+
+settings = get_settings()
 
 app = FastAPI(
     title="EduScope - Higher Education Intelligence Platform",
@@ -11,7 +15,7 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "http://127.0.0.1:3000"],
+    allow_origins=settings.cors_origin_list,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -28,4 +32,15 @@ app.include_router(recommendations.router, prefix="/api/v1")
 
 @app.get("/api/health")
 async def health_check():
-    return {"status": "ok", "service": "eduscope"}
+    from app.database import async_engine
+    db_ok = True
+    try:
+        async with async_engine.connect() as conn:
+            await conn.execute(text("SELECT 1"))
+    except Exception:
+        db_ok = False
+    return {
+        "status": "ok" if db_ok else "degraded",
+        "service": "eduscope",
+        "database": "connected" if db_ok else "unreachable",
+    }

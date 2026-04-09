@@ -1,3 +1,5 @@
+import os
+
 from celery import Celery
 from celery.schedules import crontab
 from app.config import get_settings
@@ -6,8 +8,8 @@ settings = get_settings()
 
 celery_app = Celery(
     "eduscope_tasks",
-    broker=settings.REDIS_URL,
-    backend=settings.REDIS_URL,
+    broker=os.environ.get("REDIS_URL", settings.REDIS_URL),
+    backend=os.environ.get("REDIS_URL", settings.REDIS_URL),
 )
 
 celery_app.conf.update(

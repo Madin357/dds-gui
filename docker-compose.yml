@@ -36,10 +36,12 @@ services:
       - ./backend:/app
       - ./mock-sources:/mock-sources
     environment:
+      - ENVIRONMENT=development
       - DATABASE_URL=postgresql+asyncpg://dds:dds_dev_password@postgres:5432/eduscope
       - DATABASE_URL_SYNC=postgresql://dds:dds_dev_password@postgres:5432/eduscope
       - REDIS_URL=redis://redis:6379/0
       - SECRET_KEY=dev-secret-key-change-in-production
+      - CORS_ORIGINS=http://localhost:3000,http://127.0.0.1:3000
       - MOCK_SOURCES_PATH=/mock-sources
     depends_on:
       postgres:
@@ -54,6 +56,7 @@ services:
       - ./backend:/app
       - ./mock-sources:/mock-sources
     environment:
+      - ENVIRONMENT=development
       - DATABASE_URL=postgresql+asyncpg://dds:dds_dev_password@postgres:5432/eduscope
       - DATABASE_URL_SYNC=postgresql://dds:dds_dev_password@postgres:5432/eduscope
       - REDIS_URL=redis://redis:6379/0
@@ -72,6 +75,7 @@ services:
       - ./backend:/app
       - ./mock-sources:/mock-sources
     environment:
+      - ENVIRONMENT=development
       - DATABASE_URL=postgresql+asyncpg://dds:dds_dev_password@postgres:5432/eduscope
       - DATABASE_URL_SYNC=postgresql://dds:dds_dev_password@postgres:5432/eduscope
       - REDIS_URL=redis://redis:6379/0

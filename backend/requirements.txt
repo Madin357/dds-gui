@@ -3,9 +3,15 @@ fastapi
 uvicorn[standard]
 python-multipart
 
-# Database (SQLite)
+# Database
 sqlalchemy[asyncio]
 aiosqlite
+asyncpg
+psycopg2-binary
+
+# Background tasks
+celery
+redis
 
 # Auth
 pyjwt

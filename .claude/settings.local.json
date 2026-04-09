@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python -c \"from app.config import get_settings; s = get_settings\\(\\); print\\('DATABASE_URL:', s.DATABASE_URL\\); print\\('REDIS_URL:', s.REDIS_URL\\); print\\('CORS:', s.cors_origin_list\\); print\\('is_sqlite:', s.is_sqlite\\); print\\('is_production:', s.is_production\\)\")"
+    ]
+  }
+}

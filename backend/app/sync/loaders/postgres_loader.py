@@ -2,7 +2,7 @@
 
 import uuid
 import logging
-from datetime import date
+from datetime import date, datetime, timezone
 
 from sqlalchemy.orm import Session
 from sqlalchemy import text
@@ -102,8 +102,9 @@ def upsert_records(
                 )
                 if set_clause:
                     resolved["_existing_id"] = str(existing[0])
+                    resolved["_updated_now"] = datetime.now(timezone.utc).isoformat()
                     db.execute(
-                        text(f"UPDATE {target_table} SET {set_clause}, updated_at = datetime('now') WHERE id = :_existing_id"),
+                        text(f"UPDATE {target_table} SET {set_clause}, updated_at = :_updated_now WHERE id = :_existing_id"),
                         resolved,
                     )
             else:
