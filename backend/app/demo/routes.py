@@ -9,6 +9,7 @@ from typing import Optional
 import jwt
 from fastapi import APIRouter, FastAPI, HTTPException, Depends, Query
 from fastapi.security import OAuth2PasswordBearer
+from pydantic import BaseModel
 
 from app.config import get_settings
 from app.demo.data import (
@@ -19,6 +20,22 @@ from app.demo.data import (
 
 settings = get_settings()
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/v1/auth/login")
+
+
+# --- Request models (ensures FastAPI parses JSON body correctly) ---
+
+class LoginRequest(BaseModel):
+    email: str
+    password: str
+
+class RefreshRequest(BaseModel):
+    refresh_token: str
+
+class TriggerSyncRequest(BaseModel):
+    sync_type: str = "incremental"
+
+class UpdateStatusRequest(BaseModel):
+    status: str
 
 
 # --- Auth helpers ---
@@ -56,11 +73,9 @@ sync_router = APIRouter(prefix="/sync", tags=["sync"])
 # ===================== AUTH =====================
 
 @auth_router.post("/login")
-async def demo_login(req: dict):
-    email = req.get("email", "")
-    password = req.get("password", "")
-    user = DEMO_USERS.get(email)
-    if not user or user["password"] != password:
+async def demo_login(req: LoginRequest):
+    user = DEMO_USERS.get(req.email)
+    if not user or user["password"] != req.password:
         raise HTTPException(status_code=401, detail="Invalid email or password")
     return {
         "access_token": _create_token(user["id"], user["institution_id"], "access", 120),
@@ -70,9 +85,9 @@ async def demo_login(req: dict):
 
 
 @auth_router.post("/refresh")
-async def demo_refresh(req: dict):
+async def demo_refresh(req: RefreshRequest):
     try:
-        payload = jwt.decode(req.get("refresh_token", ""), settings.SECRET_KEY, algorithms=["HS256"])
+        payload = jwt.decode(req.refresh_token, settings.SECRET_KEY, algorithms=["HS256"])
         user_id = payload["sub"]
         inst_id = payload["inst"]
     except Exception:
@@ -248,8 +263,8 @@ async def demo_get_recommendation(rec_id: str, user: dict = Depends(_get_demo_us
 
 
 @recommendations_router.put("/recommendations/{rec_id}/status")
-async def demo_update_rec_status(rec_id: str, req: dict, user: dict = Depends(_get_demo_user)):
-    return {"message": "Status updated", "new_status": req.get("status", "accepted")}
+async def demo_update_rec_status(rec_id: str, req: UpdateStatusRequest, user: dict = Depends(_get_demo_user)):
+    return {"message": "Status updated", "new_status": req.status}
 
 
 @recommendations_router.get("/labour-market/trends")
@@ -287,8 +302,8 @@ async def demo_sync_runs(job_id: str, user: dict = Depends(_get_demo_user)):
 
 
 @sync_router.post("/jobs/{job_id}/trigger")
-async def demo_trigger_sync(job_id: str, req: dict, user: dict = Depends(_get_demo_user)):
-    return {"message": f"Sync triggered ({req.get('sync_type', 'incremental')})"}
+async def demo_trigger_sync(job_id: str, req: TriggerSyncRequest, user: dict = Depends(_get_demo_user)):
+    return {"message": f"Sync triggered ({req.sync_type})"}
 
 
 @sync_router.get("/status")
